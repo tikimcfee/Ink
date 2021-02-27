@@ -199,7 +199,8 @@ private extension FormattedText {
         }
 
         private mutating func parseNonTriggeringCharacter() {
-            switch reader.currentCharacter {
+            let current = reader.currentCharacter
+            switch current {
             case "\\":
                 addPendingTextIfNeeded()
                 skipCharacter()
@@ -214,7 +215,7 @@ private extension FormattedText {
                     fallthrough
                 }
             default:
-                if let escaped = reader.currentCharacter.escaped {
+                if let escaped = current.escaped {
                     addPendingTextIfNeeded()
                     text.components.append(.text(Substring(escaped)))
                     skipCharacter()
